@@ -1,6 +1,6 @@
 @extends("default")
     @section("content")
-    <div style="width:100%;height:70px"></div>
+    <div style="width:100%;height:80px"></div>
     <div class="ui one column centered grid" style="margin:10% 0">
     <div class="four wide computer ten wide mobile column">
       <h1 style="color:lightcoral">Cadastre-se</h1>
@@ -27,16 +27,16 @@
         <input type="submit" class="ui green button" value="Criar conta" id="btn">
       </form>
       </div>
-    </div> 
-    
+    </div>
+
     <script>
-        function validate(){                
+        function validate(){
             var bool = true;
             $("#signup input").each(function(){
                 if($(this).val() == ""){
                     $(this).css("box-shadow","0 0 8px red");
                     $("#error").show();
-                    bool = false;                  
+                    bool = false;
                 }else{
                     $(this).css("box-shadow","none");
                 }

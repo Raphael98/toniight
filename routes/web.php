@@ -13,6 +13,9 @@
 
 Route::get('/', "PageController@home")->name("home");
 
+Route::get('/search', "PageController@search")->name("search");
+
+Route::post('/search', "PageController@searchKey")->name("search.key");
 
 Route::group(["middleware" => "guest"], function(){
 
@@ -33,5 +36,9 @@ Route::group(["middleware" => "auth"], function(){
 
     Route::post("/user/post/publish", "PostController@publish")->name("post.publish");
 
-    Route::get("/user/settings", "PostController@publish")->name("user.settings");
+    Route::get("/user/settings", "UserController@settings")->name("user.settings");
+
+    Route::post("/user/update", "PostController@update")->name("user.update");
+
+    Route::get("/user/post/delete/{id}", "PostController@delete")->name("post.delete");
 });

@@ -21,7 +21,7 @@
       <button>&#9776;</button>
       <div id="itens">
         <a href="#sobre">Sobre</a>
-        <a href="#">Pesquise</a>
+        <a href="{{route('search')}}">Pesquise</a>
       @if(Auth::check())
         <a href="{{route('user.logout')}}">Logout</a>
         <a href="{{route('user.profile')}}">Minha conta</a>
@@ -31,7 +31,8 @@
       @endif
       </div>
   </nav>
-  @yield("content");
+  
+  @yield("content")
 
   <footer class="ui grid" style="padding: 0 10px; text-align:center">
         <div class="sixteen wide column">

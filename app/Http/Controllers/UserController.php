@@ -42,7 +42,11 @@ class UserController extends Controller{
     }
 
     public function profile(){
-      $posts = Post::all();
+      $posts = Auth::user()->posts;
       return view("user.profile", ["user" => Auth::user(), "posts" => $posts]);
+    }
+
+    public function settings(){
+      return view("user.settings",["user" => Auth::user()]);
     }
 }

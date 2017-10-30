@@ -10,13 +10,13 @@
 @endif
 @if(Session::has("success"))
   <div class="ui positive message">
-    <div class="header">Ótimo!</div>
+    <div class="header">Concluído!</div>
       {{Session::get("success")}}
     </div>
 @endif
 @if(Session::has("warning"))
   <div class="ui warning message">
-    <div class="header">Ótimo!</div>
+    <div class="header">Atenção!</div>
       {{Session::get("warning")}}
     </div>
 @endif

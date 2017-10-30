@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 
-//TODO: Convert date type
 class PostController extends Controller {
 
     public function publish(Request $request){
@@ -14,9 +13,20 @@ class PostController extends Controller {
                 "num" => "required"];
         $this->validate($request, $rules);
         $inputs = $request->all();
-        $inputs["date"] = toMysqlDateFormat($input["date"]);
+        //If the date is equals to "__/__/____", return null
+        $inputs["date"] = (toMysqlDateFormat($inputs["date"])) ? toMysqlDateFormat($inputs["date"]) : null;
         $post = new Post($inputs);
         $request->user()->posts()->save($post);
         return redirect()->back();
+    }
+
+    public function delete($id) {
+      $post = Post::find($id);
+      $post->delete();
+      return redirect()->back()->with("success", "Sua postagem foi deletada com sucesso");
+    }
+
+    public function update(){
+
     }
 }

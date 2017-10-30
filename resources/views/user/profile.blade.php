@@ -1,75 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Perfil: {{$user->nome}}</title>
-  <meta charset="utf-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link rel="icon" href="{{asset('/img/icon2.png')}}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{asset('/css/semantic.min.css')}}">
-    <link rel="stylesheet" href="{{asset('/css/style.css')}}">
-    <script src="{{asset('/js/jqueryGoogle.js')}}"></script>
-    <script src="{{asset('/js/semantic.min.js')}}"></script>
-    <script src="{{asset('/js/functions.js')}}"></script>
-    <style>
-      body{
-        background-color: #fff7f7;
-      }
-    </style>
-</head>
-<body>
-
-  <div id="sidebar">
-    <div class="item">
-      <img src="{{asset('/img/user.png')}}" alt="profile picture" height="140px">
-      <h3>{{$user->nome}}</h3>
-    </div>
-  </div>
-
-  <nav id="menu" style="border-bottom:1px solid lightgray;">
-      <a href="{{url('/')}}"><span id="logo">toniight</span></a>
-      <button>&#9776;</button>
-      <div id="itens">
-        <a href="{{route('user.logout')}}"><i class="browser icon"></i> Postagens</a>
-        <a href="{{route('user.logout')}}"><i class="search icon"></i> Pesquisar</a>
-        <a href="{{route('user.settings')}}"><i class="setting icon"></i> Configurações</a>
-        <a href="{{route('user.logout')}}"><i class="sign out icon"></i> Sair</a>
-      </div>
-  </nav>
-
-  <div style="width:100%;height:70px;background:white"></div>
-
-  {{-- <div class="ui left vertical inverted menu sidebar" id="user-sidebar">
-    <a class="item logo">toniight</a>
-    <div class="item">
-      <div class="item">
-        <img src="{{asset('/img/user.png')}}" height="140px" style="border-radius:5px" alt="profile pictures">
-      </div>
-      <h3>{{$user->nome}}</h3>
-    </div>
-    <a class="item"><i class="browser icon"></i> Postagens</a>
-    <a class="item"><i class="search icon"></i> Pesquisar</a>
-    <a class="item"><i class="setting icon"></i> Configurações</a>
-    <a class="item" href="{{route('user.logout')}}"><i class="sign out icon"></i> Sair</a>
-  </div> --}}
-
+@extends("user.template")
+  @section("content")
     <section class="ui grid">
     <div class="four wide computer five wide tablet sixteen wide mobile column">
       <div class="ui segment" style="margin:10px">
-        <span class="strong">{{$user->nome}}</span>
+        <h1>{{$user->nome}}</h1>
       </div>
     </div>
     <div class="eight wide computer ten wide tablet sixteen wide mobile column" style="margin:5px">
       <h1>Postagens</h1>
       <button class="ui green button" id="btnpublish">Publicar</button>
+      @include("includes.messages")
       @if(count($posts) > 0)
         @foreach($posts as $post)
           <div class="ui segment" style="margin:10px 0">
-            <h1>{{$post->title}}</h1>
+            <div class="ui buttons">
+              <a href="{{route("post.delete",['id' => $post->id])}}"<button class="ui red button"><i class="ui icon remove"></i></button></a>
+              <button class="ui blue button"><i class="ui icon edit"></i></button>
+            </div>
+            <div style="float:right"> {{$post->date != "" ?  "Data:".toBRFormat($post->date) : "Sem data"}}</div>
+            <h2>{{$post->title}}</h2>
+            <p>Rua {{$post->rua}}, {{$post->bairro}}, Nº {{$post->num}}</p>
+            <p>{{$post->desc}}</p>
           </div>
         @endforeach
       @else
-        <span class="strong">Ops! Foi ainda não publicou nada :/</span>
+        <h2>Ops! Você ainda não publicou nada :/</h2>
       @endif
     </div>
 
@@ -91,7 +46,7 @@
           </div>
           <div class="field">
             <label for="date">Data</label>
-            <input type="text" name="date">
+            <input type="text" name="date" id="date" placeholder="(OPCIONAL)">
           </div>
         </div>
         <div class="field">
@@ -116,30 +71,12 @@
       </form>
     </div>
   </div>
-
   <script>
     $(document).ready(function(){
-      // $("#menu button").click(function(){
-      //   $("#user-sidebar").sidebar('setting','transition','overlay').sidebar("toggle");
-      // });
+      $("#date").mask("99/99/9999");
       $("#btnpublish").click(function(){
         $("#publish").modal("show");
       });
     });
-
-    function validate(){
-      var bool = true;
-        $(".obg").each(function(){
-            if($(this).val() == ""){
-                $(this).css("box-shadow","0 0 8px red");
-                $("#error").show();
-                bool = false;
-            }else{
-                $(this).css("box-shadow","none");
-            }
-        });
-        return bool;
-      }
-    </script>
-</body>
-</html>
+  </script>
+@endsection

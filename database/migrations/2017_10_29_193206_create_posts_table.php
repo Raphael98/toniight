@@ -22,7 +22,6 @@ class CreatePostsTable extends Migration
             $table->string("rua");
             $table->string("bairro");
             $table->string("num");
-            $table->tinyInteger("rating")->default(1);
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });
