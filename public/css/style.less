@@ -1,0 +1,168 @@
+// out: ../css/style.css, sourcemap: false, compress: true
+
+@import url('https://fonts.googleapis.com/css?family=Righteous');
+
+@theme: lightcoral;;
+@details: rgb(255, 244, 88);
+
+body, html{
+    margin:0;
+    padding: 0;
+}
+
+.logo{
+    color:@theme;
+    font-size:2rem;
+    font-family: Righteous;
+}
+
+#menu{
+    z-index: 1;
+    position:fixed;
+    width:100vw;
+    height: 70px;
+    box-shadow: 0px 0px 8px gray;
+    line-height: 70px;
+    text-align: right;
+    background: white;
+    button{
+        border:none;
+        background:none;
+        font-weight: bold;
+        font-size:2rem;
+        padding: 0 5%;
+    }
+    #logo{
+        float:left;
+        font-family: Righteous;
+        font-size:2.1rem;
+        margin: 0 2%;
+        color:@theme;
+    }
+    #itens{
+        margin: 0 2%;
+        a{
+            cursor:pointer;
+            display: inline-block;
+            height:100%;
+            padding: 0px 3%;
+            text-decoration: none;
+            color:rgb(73, 73, 73);
+            transition: .3s;
+            border-radius: 5px;
+            &:hover{
+                color: @theme;
+                border-bottom: 5px solid @theme;
+            }
+        }
+    }
+}
+
+#banner{
+    background-image: url(../img/ben-duchac-6.jpg);
+    background-position: center;
+    background-size:cover;
+    width:100vw;
+    height:500px;
+    -moz-transition: 1s background-image;
+    -webkit-transition: 1s background-image;
+    -ms-transition: 1s background-image;
+    -o-transition: 1s background-image;
+    transition: 1s background-image;
+    position:relative;
+    #desc{
+        line-height: normal;
+        position: absolute;
+        width:100%;
+        text-align:center;
+        font-size:2rem;
+        color: white;
+        text-shadow: 0 0 8px black;
+        top:45%;
+
+        h1{
+            font-size:4rem;
+        }
+    }
+}
+
+
+
+#sidebar{
+    z-index: 2;
+    position:fixed;
+    height:100vh;
+    width:60vw;
+    background-color: rgb(44, 44, 44);
+    left:-60vw;
+    transition: .3s;
+    .item {
+        color:white;
+        //text-indent: 15px;
+        display:block;
+        padding: 10%;
+        border-bottom: solid 1px lightgray;
+    }
+}
+
+.my-title{
+    text-align: center;
+    color: @theme;
+    h1{
+        font-size:3rem;
+    }
+}
+
+footer{
+    background-color: rgb(65, 65, 65);
+    color: white;
+}
+
+.circle{
+    display:inline-block;
+    height:30px;
+    width: 30px;
+    line-height: 30px;
+    border-radius:25px;
+    border: solid white 1px;
+    text-align: center;
+    margin:5px;
+    transition: .5s;
+}
+
+#face:hover{
+    background: #3b5998;
+}
+#twitter:hover{
+    background-color: #1dcaff;
+}
+
+.strong{
+  font-weight:bold;
+  font-size:2rem;
+}
+
+@width: 732px;
+@media (max-width:@width){
+    #itens{
+        display:none;
+    }
+    #banner #desc{
+        h1{
+            font-size:3rem;
+        }
+    }
+}
+
+@media (min-width: @width){
+    #login {
+        width:400px;
+        margin: 0 -200px;
+    }
+    #sidebar {
+        display:none;
+    }
+    #menu button {
+        display:none;
+    }
+}
