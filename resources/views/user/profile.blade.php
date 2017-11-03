@@ -4,6 +4,14 @@
     <div class="four wide computer five wide tablet sixteen wide mobile column">
       <div class="ui segment" style="margin:10px">
         <h1>{{$user->nome}}</h1>
+        <table style="text-align:center">
+          <tr>
+            <th>Postagens</th>
+          </tr>
+          <tr>
+            <td>{{count($posts)}}</td>
+          </tr>
+        </table>
       </div>
     </div>
     <div class="eight wide computer ten wide tablet sixteen wide mobile column" style="margin:5px">
@@ -12,7 +20,7 @@
       @include("includes.messages")
       @if(count($posts) > 0)
         @foreach($posts as $post)
-          <div class="ui segment" style="margin:10px 0">
+          <div class="ui segment post" style="margin:10px 0">
             <div class="ui buttons">
               <a href="{{route("post.delete",['id' => $post->id])}}"<button class="ui red button"><i class="ui icon remove"></i></button></a>
               <button class="ui blue button"><i class="ui icon edit"></i></button>

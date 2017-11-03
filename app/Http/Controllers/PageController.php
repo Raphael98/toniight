@@ -25,6 +25,7 @@ class PageController extends Controller {
       return view("search")->with("posts", $posts);
     }
 
+
     public function searchKey(Request $request){
       $key = $request->input("keyword");
       $posts = Post::where("title", "like", "%".$key."%")->get();

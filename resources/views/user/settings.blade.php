@@ -4,30 +4,38 @@
       <div class="six wide computer fourteen wide mobile column">
         <div class="ui segment" style="margin:10px 0">
           <h1>Configurações</h1>
-          <form class="ui form" action="{{route('user.update')}}" method="POST">
+          @include("includes.messages")
+          <form class="ui form" action="{{route('user.update',['field' => 'nome'])}}" method="POST">
+            {{ csrf_field() }}
             <div class="field">
               <label>Nome</label>
-              <input type="text" name="nome">
+              <div class="ui action input">
+                <input type="text" name="nome">
+                <button type="submit" class="ui green button">Alterar</button>
+              </div>
             </div>
-            <input type="submit" class="ui green button" value="Alterar nome">
           </form>
-          <form class="ui form" action="{{route('user.update')}}" method="POST">
+          <form class="ui form" action="{{route('user.update', ['field' => 'email'])}}" method="POST">
+            {{csrf_field()}}
             <div class="field">
               <label>Email</label>
-              <input type="text" name="nome">
+              <div class="ui action input">
+                <input type="text" name="email">
+                <button type="submit" class="ui green button">Alterar</button>
+              </div>
             </div>
-            <input type="submit" class="ui green button" value="Alterar nome">
           </form>
-          <form class="ui form" action="{{route('user.update')}}" method="POST">
+          <form class="ui form" action="{{route('user.update', ['field' => 'password'])}}" method="POST">
+            {{csrf_field()}}
             <div class="field">
               <label>Senha atual</label>
-              <input type="text" name="nome">
+              <input type="password" name="old">
             </div>
             <div class="field">
               <label>Nova senha</label>
-              <input type="text" name="nome">
+              <input type="password" name="password">
             </div>
-            <input type="submit" class="ui green button" value="Alterar nome">
+            <input type="submit" class="ui green button" value="Alterar">
           </form>
         </div>
       </div>

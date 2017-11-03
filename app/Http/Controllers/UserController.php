@@ -16,10 +16,12 @@ class UserController extends Controller{
         $this->user = $user;
     }
 
-    public function store(Request $request){
+    public function store(Request $request, User $user){
+
         $this->validate($request, $this->user->rules);
         $input = $request->all();
         $input["password"] = bcrypt($input["password"]);
+        $input["nome"] = $user->initialsToUpper($input["nome"]);
         $user = User::create($input);
         Auth::login($user);
         return redirect()->route("user.profile");
@@ -44,6 +46,27 @@ class UserController extends Controller{
     public function profile(){
       $posts = Auth::user()->posts;
       return view("user.profile", ["user" => Auth::user(), "posts" => $posts]);
+    }
+
+    public function update($field, Request $request){
+      $user = Auth::user();
+      switch($field){
+        case "nome":
+          $user->nome = $request->input("nome");
+          break;
+        case "email":
+          $user->email = $request->input("email");
+          break;
+        case "password":
+          if(\Hash::check($request->input("old"), $user->password)){
+            $user->password = bcrypt($request->input("password"));
+          }else{
+            return redirect()->back()->with("warning", "A sua senha atual não confere");
+          }
+          break;
+      }
+      $user->save();
+      return redirect()->back()->with("success", "Seus dados foram alterados com sucesso");
     }
 
     public function settings(){

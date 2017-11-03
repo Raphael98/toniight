@@ -17,6 +17,11 @@ Route::get('/search', "PageController@search")->name("search");
 
 Route::post('/search', "PageController@searchKey")->name("search.key");
 
+Route::get('/test', function(){
+  
+});
+
+
 Route::group(["middleware" => "guest"], function(){
 
     Route::get("/signup", "PageController@signup")->name("signup");
@@ -41,4 +46,6 @@ Route::group(["middleware" => "auth"], function(){
     Route::post("/user/update", "PostController@update")->name("user.update");
 
     Route::get("/user/post/delete/{id}", "PostController@delete")->name("post.delete");
+
+    Route::post("/user/update/{field}", "UserController@update")->name("user.update");
 });

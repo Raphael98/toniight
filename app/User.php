@@ -25,6 +25,14 @@ class User extends Authenticatable {
 
     protected $guarded = ["id", "admin", "active"];
 
+    public function initialsToUpper($name){
+      $name = explode(" ", $name);
+      for($i = 0; $i < count($name); $i++){
+        $name[$i][0] = strtoupper($name[$i][0]);
+      }
+      return join(" ", $name);
+    }
+
     public function posts(){
       return $this->hasMany("App\Post");
     }
